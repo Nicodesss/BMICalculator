@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
@@ -26,13 +27,14 @@ class MainActivity : AppCompatActivity() {
 
 
         check.setOnClickListener { onClicked ->
-            val bmiResult:Double = weight.text.toString().toDouble()/ ((height.text.toString().toDouble()/100)*(height.text.toString().toDouble()/100))
-            val bmi = String.format("%.2f", bmiResult).toDouble()
-            result.text = bmi.toString()
-
-            healthyCheck(bmi,health)
-            health.text = resultHealth
-            range.text = healthRange
+            if (validator(height.text.toString(),weight.text.toString())) {
+                val bmiResult:Double = weight.text.toString().toDouble()/ ((height.text.toString().toDouble()/100)*(height.text.toString().toDouble()/100))
+                val bmi = String.format("%.2f", bmiResult).toDouble()
+                result.text = bmi.toString()
+                healthyCheck(bmi,health)
+                health.text = resultHealth
+                range.text = healthRange
+            }
         }
     }
 
@@ -64,5 +66,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun validator(height:String?,weight:String?):Boolean{
+        return when{
+            weight.isNullOrEmpty() -> {
+                Toast.makeText(this,"Input weight!", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            height.isNullOrEmpty() -> {
+                Toast.makeText(this,"Input height!", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            else ->
+                return true
+        }
+    }
+
 
 }

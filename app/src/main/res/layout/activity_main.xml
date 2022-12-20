@@ -148,7 +148,7 @@
         android:id="@+id/btnCheck"
         android:layout_width="240dp"
         android:layout_height="77dp"
-        android:backgroundTint="@color/design_default_color_primary_variant"
+        android:backgroundTint="@android:color/system_accent1_700"
         android:elevation="20dp"
         android:text="CHECK"
         android:textSize="40sp"
